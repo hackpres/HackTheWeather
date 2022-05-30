@@ -1,0 +1,13 @@
+.custom-bg-primary {
+    background-image: linear-gradient(to right, #2E34A6, #663399);
+    width: 100%;
+}
+
+.custom-btn-history {
+    background-color: rgb(181, 181, 181);
+    color: black;
+}
+
+.custom-hide {
+    display: none;
+}
