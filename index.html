@@ -9,24 +9,24 @@
     <title>Hack the Weather</title>
 </head>
 
-<header class="d-flex text-center">
+<header class="d-flex text-center mb-4">
     <div class="d-flex container mw-100 g-0">
         <div class="h1 mb-2 custom-bg-primary text-white py-4">Hack the weather</div>
     </div>
 </header>
-<body class="row">
-    <section id="city" class="col-sm-12 col-md-2 justify-content-center align-items-center text-center">
-        <div id="citySearch" class="row-md-3">
+<body class="container gx-0">
+    <section id="city" class="row text-center">
+        <div id="citySearch" class="col">
             <h2>Search for a City:</h2>
             <input id="citySearchInput" type="text" placeholder="Atlanta">
             <button id="searchBtn" class="btn btn-primary" type="button">Search</button>
         </div>
 
-        <div id="previousSearchHistory" class="row-md-9 d-grid gap-2">
+        <div id="previousSearchHistory" class="col mb-4">
             <button id="previousHistoryBtn" class="btn custom-btn-history m-2">Previously Searched Cities</button>
         </div>
         
-        <div id="cityHistory" class="row-md-9 d-grid gap-2 custom-hide">
+        <div id="cityHistory" class="col custom-hide">
             <!-- <button class="btn  custom-btn-history">Chicago</button>
             <button class="btn  custom-btn-history" type="button">Los Angeles</button>
             <button class="btn  custom-btn-history">Miami</button>
@@ -35,23 +35,22 @@
             <button class="btn  custom-btn-history">Charleston</button> -->
         </div>
     </section>
-    <main id="weatherInfo" class="col-sm-12 col-md-9">
-        <section id="weatherCurrent" class="row-6 contianer border-dark">
-            <h2>
-
+    <main id="weatherInfo" class="row text-center">
+        <section id="weatherCurrent" class="col-xs-auto mb-4">
+            <h2 id="cityName" class="mb-3">
+                Atlanta
             </h2>
-            <p>Temperature: <p id="currentTemp"></p></p>
-            <p>Wind: <p id="currentWind"></p></p>
-            <p>Humidity: <p id="currentHumidity"></p></p>
-            <p>UV Index: <p id="currentUVIndex"></p></p>
+            <div class="container">
+                <p>Temperature: <p id="currentTemp"></p></p>
+                <p>Wind: <p id="currentWind"></p></p>
+                <p>Humidity: <p id="currentHumidity"></p></p>
+                <p>UV Index: <p id="currentUVIndex"></p></p>
+            </div>
+            
         </section>
-        <div id="WeatherForcast" class="row-6">
-            <h3 id="fiveDayHeader" class="text-center">5 Day Forecast:</h3>
-            <div id="forecast1" class="col-2"></div>
-            <div id="forecast2" class="col-2"></div>
-            <div id="forecast3" class="col-2"></div>
-            <div id="forecast4" class="col-2"></div>
-            <div id="forecast5" class="col-2"></div>
+        <div id="WeatherForcast" class="col-xs-12">
+            <h3 id="fiveDayHeader" class="mb-3">5 Day Forecast:</h3>
+            <div id="forecast" class="row">
         </div>
     </main>
     <script src="./assets/js/script.js"></script>
