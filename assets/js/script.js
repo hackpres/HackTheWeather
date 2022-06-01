@@ -22,18 +22,7 @@ const forecast = document.getElementById("forecast");
 initialize();
 
 function initialize() {
-    getWeather(`https://api.openweathermap.org/data/2.5/onecall?lat=33.748997&lon=-84.387985&&appid=cccd45bf2b5eca98c58877bde4b85aed`)
-}
-
-console.log(Date.now());
-
-function kelvinToF(kelvin) {
-    let subtract = kelvin - 273.15;
-    let multiply = subtract * 9;
-    let divide = multiply / 5;
-    let add = divide + 32;
-    let fahrenheit = add.toFixed(2);
-    return fahrenheit
+    getWeather(`https://api.openweathermap.org/data/2.5/onecall?lat=33.748997&lon=-84.387985&units=imperial&&appid=cccd45bf2b5eca98c58877bde4b85aed`)
 }
 
 function getWeather(apiURL) {
@@ -48,9 +37,7 @@ function getWeather(apiURL) {
         console.log(data)
 
         let weatherDate = new Date;
-        let weatherIcon = data.current.weather[0].icon;
         let weatherTemp = data.current.temp;
-        let weatherTempF = kelvinToF(weatherTemp);
         let weatherWind = data.current.wind_speed;
         let weatherHumidity = data.current.humidity;
         let weatherUV = data.current.uvi
@@ -61,19 +48,18 @@ function getWeather(apiURL) {
         // console.log(weatherHumidity)
         // console.log(weatherUV)
 
-        tempEl.innerText = `${weatherTempF}℉`
+        tempEl.innerText = `${weatherTemp}℉`
         windEl.innerText = `${weatherWind} mph`
         humidityEl.innerText = `${weatherHumidity}%`
         uvEl.innerText = weatherUV
 
         let fiveDayData = data.daily.splice(0,5);
-        console.log(fiveDayData)
         fiveDayData.forEach((day) => {
-            let dayMonthYear = day.dt;
+            let dateUnix = day.dt;
+            let timestamp = dateUnix * 1000;
+            let dateTimestamp = new Date(timestamp);
             let dayIcon = day.weather[0].icon;
-            console.log(dayIcon)
             let dayTemp = day.temp.day;
-            let dayTempF = kelvinToF(dayTemp);
             let dayWind = day.wind_speed;
             let dayHumidity = day.humidity;
 
@@ -83,12 +69,13 @@ function getWeather(apiURL) {
             let temp = document.createElement("p");
             let wind = document.createElement("p");
             let humidity = document.createElement("p");
-            container.classList.add("container", "bg-info", "w-50", "rounded-4");
-            date.innerText = dayMonthYear;
-            icon.innerText = dayIcon;
-            temp.innerText = `${dayTempF}℉`
-            wind.innerText = `${dayWind} mph`
-            humidity.innerText = `${dayHumidity}%`
+            container.classList.add("container", "justify-content-center", "my-2", "w-75", "custom-bg-info", "text-white");
+            date.innerText = `${dateTimestamp.getDate()}/${dateTimestamp.getMonth()}/${dateTimestamp.getFullYear()}`;
+            date.classList.add("mb-0", "mt-3", "fs-5")
+            icon.setAttribute("src", `https://openweathermap.org/img/wn/${dayIcon}@2x.png`);
+            temp.innerText = `Temperature: ${dayTemp}℉`
+            wind.innerText = `Wind Speed: ${dayWind} mph`
+            humidity.innerText = `Humidity: ${dayHumidity}%`
 
             container.appendChild(date);
             container.appendChild(icon);
