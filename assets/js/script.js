@@ -30,6 +30,9 @@ function clearInputContent() {
     while (forecast.firstChild) {
         forecast.removeChild(forecast.firstChild);
     }
+    while (historyEl.firstChild) {
+        historyEl.removeChild(historyEl.firstChild);
+    }
 }
 
 function getCityCoordinates(userCity) {
@@ -55,22 +58,37 @@ function getCityCoordinates(userCity) {
 
 function saveToLocalStorage(city, dataObject) {
     localStorage.setItem(city, JSON.stringify(dataObject));
-    retrieveCityStorage()
+    generateCityHistoryBtns()
 }
 
-function retrieveCityStorage() {
+function generateCityHistoryBtns() {
     let storedCities = Object.keys(localStorage);
     filteredCities = storedCities.filter(city => city);
     filteredCities.forEach(savedCity => {
-        // console.log(savedCity)
-        historyEl.innerHTML +=`
-        <button type="button" class="w-100 btn custom-btn-history my-1">
-            ${savedCity}
-        </button>
-        `
+        let cityButton = document.createElement("button");
+        cityButton.type = "button";
+        cityButton.classList.add("w-100", "btn", "custom-btn-history", "my-1");
+        cityButton.innerText = savedCity;
+
+        cityButton.addEventListener('click', (e) => getWeatherFromHistory(e));
+
+        historyEl.appendChild(cityButton);
     })
 }
 
+function getWeatherFromHistory(e) {
+    let selectedHistoryBtn = e.target;
+    let selectedCity = selectedHistoryBtn.innerText;
+    let selectedCityCoordinates = localStorage.getItem(selectedCity);
+    let selectedCityLat = selectedCityCoordinates.split(",")[0].substring(1);
+    let selectedCityLon = selectedCityCoordinates.split(",")[1].slice(0, -1);
+
+    clearInputContent();
+    cityName.innerText = selectedCity
+    getWeather(`https://api.openweathermap.org/data/2.5/onecall?lat=${selectedCityLat}&lon=${selectedCityLon}&units=imperial&&appid=cccd45bf2b5eca98c58877bde4b85aed`)
+
+
+}
 
 function getWeather(apiURL) {
     fetch(apiURL, {
@@ -141,7 +159,7 @@ function getWeather(apiURL) {
             ;
         })
         let cityNameForStorage = citySearch.value.charAt(0).toUpperCase() + citySearch.value.slice(1);
-        saveToLocalStorage(cityNameForStorage, data)
+        saveToLocalStorage(cityNameForStorage, `${data.lat},${data.lon}`)
     });
 }
 
