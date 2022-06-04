@@ -15,7 +15,7 @@
         <div class="h1 mb-2 custom-bg-primary text-white py-4 custom-fs fw-bolder">Hack the weather</div>
     </div>
 </header>
-<body class="container gx-0">
+<body class="container gx-0 p-0">
     <section id="city" class="row text-center">
         <div id="citySearch" class="col-xs-12">
             <h2 class="fs-5 mb-1 mw-100">Search for a City:</h2>
@@ -24,17 +24,24 @@
         </div>
 
         <div id="previousSearchHistory" class="col mb-4">
-            <button id="previousHistoryBtn" class="btn custom-btn-history m-2">Previously Searched Cities</button>
+            <button id="previousHistoryBtn" class="btn custom-btn-history m-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Previously Searched Cities</button>
         </div>
-        
-        <div id="cityHistory" class="col custom-hide">
-            <!-- <button class="btn  custom-btn-history">Chicago</button>
-            <button class="btn  custom-btn-history" type="button">Los Angeles</button>
-            <button class="btn  custom-btn-history">Miami</button>
-            <button class="btn  custom-btn-history">Seattle</button>
-            <button class="btn  custom-btn-history">Dallas</button>
-            <button class="btn  custom-btn-history">Charleston</button> -->
-        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Previously Searched Cities</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div id="cityHistory" class="modal-body justify-content-center">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
     </section>
     <main id="weatherInfo" class="row text-center justify-content-center">
         <section id="weatherCurrent" class="col-xs-auto mb-4 w-75 border border-primary border-4 border-opacity-25">

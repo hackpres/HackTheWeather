@@ -64,7 +64,7 @@ function retrieveCityStorage() {
     filteredCities.forEach(savedCity => {
         // console.log(savedCity)
         historyEl.innerHTML +=`
-        <button class="btn custom-history-btn m-2">
+        <button type="button" class="w-100 btn custom-btn-history my-1">
             ${savedCity}
         </button>
         `
