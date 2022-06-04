@@ -3,12 +3,14 @@ const citySearch = document.getElementById("citySearchInput");
 const cityName = document.getElementById("cityName");
 const searchBtn = document.getElementById("searchBtn");
 const historyEl = document.getElementById("cityHistory");
+const closeModal = document.getElementById("closeModal");
 const previousHistoryBtn = document.getElementById("previousHistoryBtn");
 const tempEl = document.getElementById("currentTemp");
 const windEl = document.getElementById("currentWind");
 const humidityEl = document.getElementById("currentHumidity");
 const uvEl = document.getElementById("currentUVIndex");
 const forecast = document.getElementById("forecast");
+
 
 // previousHistoryBtn.addEventListener('click', searchHistory());
 
@@ -52,7 +54,7 @@ function getCityCoordinates(userCity) {
 
             clearInputContent();
             cityName.innerText = citySearch.value.charAt(0).toUpperCase() + citySearch.value.slice(1);
-            getWeather(`https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&units=imperial&&appid=cccd45bf2b5eca98c58877bde4b85aed`)
+            getWeather(`https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&units=imperial&&appid=cccd45bf2b5eca98c58877bde4b85aed`);
         })
 }
 
@@ -70,7 +72,10 @@ function generateCityHistoryBtns() {
         cityButton.classList.add("w-100", "btn", "custom-btn-history", "my-1");
         cityButton.innerText = savedCity;
 
-        cityButton.addEventListener('click', (e) => getWeatherFromHistory(e));
+        cityButton.addEventListener('click', (e) => {
+            getWeatherFromHistory(e);
+            closeModal.click();
+        });
 
         historyEl.appendChild(cityButton);
     })
@@ -87,7 +92,10 @@ function getWeatherFromHistory(e) {
     cityName.innerText = selectedCity
     getWeather(`https://api.openweathermap.org/data/2.5/onecall?lat=${selectedCityLat}&lon=${selectedCityLon}&units=imperial&&appid=cccd45bf2b5eca98c58877bde4b85aed`)
 
-
+    
+    // selectedHistoryBtn.classList.add("btn-close")
+    // selectedHistoryBtn.setAttribute("data-bs-dismiss", "modal");
+    // selectedHistoryBtn.setAttribute("aria-label", "Close");
 }
 
 function getWeather(apiURL) {
