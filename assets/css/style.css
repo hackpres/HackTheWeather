@@ -6,7 +6,7 @@
 
 body {
     
-    background-color: #e2e3f9;
+    background-color: #eeefff;
 }
 
 .custom-bg-primary {
@@ -32,6 +32,10 @@ body {
     border: 1px solid rebeccapurple;
     padding: .35rem;
     margin: 0;
+}
+
+.custom-img-size {
+    width: 2.5rem;
 }
 
 .custom-hide {
