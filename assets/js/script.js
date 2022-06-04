@@ -2,6 +2,7 @@
 const citySearch = document.getElementById("citySearchInput");
 const cityName = document.getElementById("cityName");
 const searchBtn = document.getElementById("searchBtn");
+const historyEl = document.getElementById("cityHistory");
 const previousHistoryBtn = document.getElementById("previousHistoryBtn");
 const tempEl = document.getElementById("currentTemp");
 const windEl = document.getElementById("currentWind");
@@ -54,6 +55,20 @@ function getCityCoordinates(userCity) {
 
 function saveToLocalStorage(city, dataObject) {
     localStorage.setItem(city, JSON.stringify(dataObject));
+    retrieveCityStorage()
+}
+
+function retrieveCityStorage() {
+    let storedCities = Object.keys(localStorage);
+    filteredCities = storedCities.filter(city => city);
+    filteredCities.forEach(savedCity => {
+        // console.log(savedCity)
+        historyEl.innerHTML +=`
+        <button class="btn custom-history-btn m-2">
+            ${savedCity}
+        </button>
+        `
+    })
 }
 
 
@@ -130,30 +145,6 @@ function getWeather(apiURL) {
     });
 }
 
-// function getWeather(userCityInput) {
-//     var city = userCityInput;
-//     console.log('city' + city);
-//     var requestCity = `http://api.openweathermap.org/geo/1.0/direct?q=${city}&&appid=cccd45bf2b5eca98c58877bde4b85aed`;
-//     console.log(requestCity);
-//     fetch(requestCity, {
-//         method: "GET",
-//         credentials: 'same-origin'
-//     })
-//         .then(function (response) {
-//             console.log(response.status)
-//             return response.json();
-//         })
-//         .then(function (data) {
-//             console.log('data received')
-//             console.log(data);
-//             var cityLon = data[0].lon;
-//             var cityLat = data[0].lat;
-//             console.log(cityLat, cityLon);
-//         });
-
-// }
-
-// console.log(`getWeather ${getWeather()}`);
 
 // function searchHistory() {
 
