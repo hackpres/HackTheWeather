@@ -12,7 +12,6 @@ const uvEl = document.getElementById("currentUVIndex");
 const forecast = document.getElementById("forecast");
 
 
-// previousHistoryBtn.addEventListener('click', searchHistory());
 
 searchBtn.addEventListener('click', () => {
     var userCity = citySearch.value
@@ -90,12 +89,8 @@ function getWeatherFromHistory(e) {
 
     clearInputContent();
     cityName.innerText = selectedCity
-    getWeather(`https://api.openweathermap.org/data/2.5/onecall?lat=${selectedCityLat}&lon=${selectedCityLon}&units=imperial&&appid=cccd45bf2b5eca98c58877bde4b85aed`)
-
-    
-    // selectedHistoryBtn.classList.add("btn-close")
-    // selectedHistoryBtn.setAttribute("data-bs-dismiss", "modal");
-    // selectedHistoryBtn.setAttribute("aria-label", "Close");
+    uvEl.classList.remove("bg-success", "text-white", "px-2", "text-start", "mb-0", "rounded","bg-warning", "text-black", "custom-bg-high", "bg-danger", "custom-bg-extreme", "border", "border-danger", "border-2");
+    getWeather(`https://api.openweathermap.org/data/2.5/onecall?lat=${selectedCityLat}&lon=${selectedCityLon}&units=imperial&&appid=cccd45bf2b5eca98c58877bde4b85aed`);
 }
 
 function getWeather(apiURL) {
@@ -117,10 +112,6 @@ function getWeather(apiURL) {
         let weatherUV = data.current.uvi
         console.log(weatherDate.toLocaleDateString())
         console.log(weatherIcon)
-        // console.log(weatherTempF)
-        // console.log(weatherWind)
-        // console.log(weatherHumidity)
-        // console.log(weatherUV)
 
         cityName.innerHTML += `
         <p class="fs-5 mb-0">${weatherDate.getMonth() + 1}/${weatherDate.getDate()}/${weatherDate.getFullYear()}
@@ -132,6 +123,17 @@ function getWeather(apiURL) {
         windEl.innerText = `${weatherWind} mph`
         humidityEl.innerText = `${weatherHumidity}%`
         uvEl.innerText = weatherUV
+        if (weatherUV < 3.0) {
+            uvEl.classList.add("bg-success", "text-white", "px-2", "text-start", "mb-0", "rounded");
+        } else if (weatherUV >= 3 && weatherUV < 6) {
+            uvEl.classList.add("bg-warning", "text-black", "px-2", "text-start", "mb-0", "rounded");
+        } else if (weatherUV >= 6 && weatherUV < 8) {
+            uvEl.classList.add("custom-bg-high", "text-black", "px-2", "text-start", "mb-0", "rounded");
+        } else if (weatherUV >= 8 && weatherUV < 11) {
+            uvEl.classList.add("bg-danger", "text-white", "px-2", "text-start", "mb-0", "rounded");
+        } else {
+            uvEl.classList.add("custom-bg-extreme", "text-white", "border", "border-danger", "border-2", "px-2", "text-start", "mb-0", "rounded");
+        }
 
         let fiveDayData = data.daily.splice(1,5);
         fiveDayData.forEach((day) => {
@@ -170,8 +172,3 @@ function getWeather(apiURL) {
         saveToLocalStorage(cityNameForStorage, `${data.lat},${data.lon}`)
     });
 }
-
-
-// function searchHistory() {
-
-// }

@@ -14,6 +14,14 @@ body {
     width: 100%;
 }
 
+.custom-bg-extreme {
+    background-color: hsl(263, 60%, 46%);
+}
+
+.custom-bg-high {
+    background-color: #d2753c;
+}
+
 .custom-fs {
     font-size: 2rem;
 }
