@@ -2,7 +2,8 @@
 const citySearch = document.getElementById("citySearchInput");
 const cityName = document.getElementById("cityName");
 const searchBtn = document.getElementById("searchBtn");
-const historyEl = document.getElementById("cityHistory");
+const historyModalEl = document.getElementById("cityHistory");
+const historyEl = document.getElementById("searchHistoryContainer")
 const closeModal = document.getElementById("closeModal");
 const previousHistoryBtn = document.getElementById("previousHistoryBtn");
 const tempEl = document.getElementById("currentTemp");
@@ -30,6 +31,9 @@ function clearInputContent() {
     cityName.innerText = ""
     while (forecast.firstChild) {
         forecast.removeChild(forecast.firstChild);
+    }
+    while (historyModalEl.firstChild) {
+        historyModalEl.removeChild(historyModalEl.firstChild);
     }
     while (historyEl.firstChild) {
         historyEl.removeChild(historyEl.firstChild);
@@ -70,13 +74,18 @@ function generateCityHistoryBtns() {
         cityButton.type = "button";
         cityButton.classList.add("w-100", "btn", "custom-btn-history", "my-1");
         cityButton.innerText = savedCity;
-
+        let clonedButton = cityButton.cloneNode(true);
         cityButton.addEventListener('click', (e) => {
             getWeatherFromHistory(e);
             closeModal.click();
         });
-
+        clonedButton.addEventListener('click', (e) => {
+            getWeatherFromHistory(e);
+            closeModal.click();
+        });
+        
         historyEl.appendChild(cityButton);
+        historyModalEl.appendChild(clonedButton);
     })
 }
 
@@ -151,13 +160,16 @@ function getWeather(apiURL) {
             let temp = document.createElement("p");
             let wind = document.createElement("p");
             let humidity = document.createElement("p");
-            container.classList.add("container", "justify-content-center", "my-2", "w-75", "custom-bg-info", "text-white");
+            container.classList.add("container", "d-md-flex", "justify-content-center", "my-2", "w-xs-75","w-md-100", "custom-bg-info", "text-white");
             date.innerText = `${dateTimestamp.getMonth() + 1}/${dateTimestamp.getDate()}/${dateTimestamp.getFullYear()}`;
             date.classList.add("mb-0", "mt-3", "fs-5")
             icon.setAttribute("src", `https://openweathermap.org/img/wn/${dayIcon}@2x.png`);
             temp.innerText = `Temperature: ${dayTemp}℉`
+            temp.classList.add("my-md-auto", "me-md-1");
             wind.innerText = `Wind Speed: ${dayWind} mph`
+            wind.classList.add("my-md-auto");
             humidity.innerText = `Humidity: ${dayHumidity}%`
+            humidity.classList.add("my-md-auto", "ms-md-1");
 
             container.appendChild(date);
             container.appendChild(icon);
@@ -166,6 +178,7 @@ function getWeather(apiURL) {
             container.appendChild(humidity);
 
             forecast.appendChild(container);
+
             ;
         })
         let cityNameForStorage = citySearch.value.charAt(0).toUpperCase() + citySearch.value.slice(1);

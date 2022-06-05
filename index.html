@@ -10,20 +10,22 @@
     <title>Hack the Weather</title>
 </head>
 
-<header class="d-flex text-center mb-2">
-    <div class="d-flex container mw-100 g-0">
-        <div class="h1 mb-2 custom-bg-primary text-white py-4 custom-fs fw-bolder">Hack the weather</div>
-    </div>
+<header class="d-flex text-center mw-100 h-auto g-0 mb-2">
+    <div class="h1 mb-2 custom-bg-primary text-white py-4 custom-fs">Hack <span class="h1 custom-subfont"> the weather</span></div>
 </header>
-<body class="container gx-0 p-0">
-    <section id="city" class="row text-center">
-        <div id="citySearch" class="col-xs-12">
+
+<body class="container-fluid row gx-0 p-0">
+    <section id="city" class="text-center col-xs-12 col-md-3">
+        <div id="citySearch" class="">
             <h2 class="fs-5 mb-1 mw-100">Search for a City:</h2>
             <input id="citySearchInput" class="custom-input border-1 border-opacity-50" type="text" placeholder="Atlanta">
             <button id="searchBtn" class="btn btn-primary mb-1" type="button">Search</button>
+            <div id="cosmeticLine" class="border-bottom border-dark border-2 border-opacity-75"></div>
+            <div id="searchHistoryContainer">
+            </div>
         </div>
 
-        <div id="previousSearchHistory" class="col mb-4">
+        <div id="previousSearchHistory" class="col col-md-0 mb-4">
             <button id="previousHistoryBtn" class="btn custom-btn-history m-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Previously Searched Cities</button>
         </div>
 
@@ -43,9 +45,10 @@
             </div>
           </div>
     </section>
-    <main id="weatherInfo" class="row text-center justify-content-center">
-        <section id="weatherCurrent" class="col-xs-auto mb-4 w-75 border border-primary border-4 border-opacity-25">
-            <h2 id="cityName" class="mb-1 fs-1">
+
+    <main id="weatherInfo" class="col-xs-12 col-md-9 text-center">
+        <section id="weatherCurrent" class="col-xs-auto mb-xs-4 border border-primary border-4 border-opacity-25">
+            <h2 id="cityName" class="mb-xs-1 mb-md-auto fs-1">
                 Atlanta
             </h2>
             <div class="container">
@@ -57,9 +60,9 @@
                 </div>
             </div>
         </section>
-        <div id="WeatherForcast" class="col-xs-12">
-            <h3 id="fiveDayHeader" class="mb-3 fs-1">5-Day Forecast:</h3>
-            <div id="forecast" class="row">
+        <div id="weatherForcast" class="col-xs-auto mt-md-3">
+            <h3 id="fiveDayHeader" class="mt-2 mb-3 fs-1">5-Day Forecast:</h3>
+            <div id="forecast" class="col-xs-12 col-md-10 offset-md-1"></div>
         </div>
     </main>
     <script src="./assets/js/script.js"></script>
