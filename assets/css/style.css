@@ -118,6 +118,61 @@ body {
         margin: 0;
         width: 100;
         text-align: center;
-        /* justify-content: center; */
     }
+    .custom-offset-1 {
+        margin-left: 8.33333333%;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .custom-fs {
+        font-size: 4.5rem;
+    }
+    .custom-subfont {
+        font-size: 3.75rem;
+    }
+    #citySearch {
+        height: 100%;
+    }
+    #cosmeticLine {
+        display: block;
+        width: 90%;
+        margin: .5rem auto;
+    }
+    #previousSearchHistory {
+        display: none;
+        width: 0px;
+    }
+    #searchHistoryContainer {
+        visibility: visible;
+        max-height: fit-content;
+        display: block;
+        margin: auto;
+        width: 95%;
+        opacity: 75%;
+    }
+    #weatherCurrent {
+        width: 97%;
+        display: flex;
+        margin: auto .5rem;
+    }
+    #forecast {
+        display: flex;
+        justify-items: center;
+    }
+    #city {
+        margin: 0;
+    }
+    #cityName {
+        align-items: center;
+        margin: auto 2rem;
+    }
+    #weatherForecast {
+        height: 10rem;
+        flex-wrap: nowrap;
+    }
+    .custom-width-xl {
+        padding-inline: clamp(1.5rem, 2.5vw, 5rem);
+    }
+    /* .custom-offset-1 {
+    } */
 }

@@ -42,7 +42,7 @@ function clearInputContent() {
 
 function getCityCoordinates(userCity) {
     
-    fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${userCity}&&appid=cccd45bf2b5eca98c58877bde4b85aed`, {
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${userCity}&&appid=cccd45bf2b5eca98c58877bde4b85aed`, {
         method: "GET"
     }) 
         .then(function (response) {
@@ -160,7 +160,7 @@ function getWeather(apiURL) {
             let temp = document.createElement("p");
             let wind = document.createElement("p");
             let humidity = document.createElement("p");
-            container.classList.add("container", "d-md-flex", "justify-content-center", "my-2", "w-xs-75","w-md-100", "custom-bg-info", "text-white");
+            container.classList.add("container", "d-md-flex", "d-xl-block", "justify-content-center", "mx-xl-2", "my-2", "pb-xl-3", "w-xs-75", "w-md-100", "custom-bg-info", "text-white", "custom-width-xl");
             date.innerText = `${dateTimestamp.getMonth() + 1}/${dateTimestamp.getDate()}/${dateTimestamp.getFullYear()}`;
             date.classList.add("mb-0", "mt-3", "fs-5")
             icon.setAttribute("src", `https://openweathermap.org/img/wn/${dayIcon}@2x.png`);
@@ -178,9 +178,7 @@ function getWeather(apiURL) {
             container.appendChild(humidity);
 
             forecast.appendChild(container);
-
-            ;
-        })
+        });
         let cityNameForStorage = citySearch.value.charAt(0).toUpperCase() + citySearch.value.slice(1);
         saveToLocalStorage(cityNameForStorage, `${data.lat},${data.lon}`)
     });
