@@ -173,6 +173,4 @@ body {
     .custom-width-xl {
         padding-inline: clamp(1.5rem, 2.5vw, 5rem);
     }
-    /* .custom-offset-1 {
-    } */
 }

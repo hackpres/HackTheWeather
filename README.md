@@ -1,20 +1,10 @@
-# 06 Server-Side APIs: Weather Dashboard
+# Hack the weather
 
-## Your Task
+## Description
 
-Third-party APIs allow developers to access their data and functionality by making requests with specific parameters to a URL. Developers are often tasked with retrieving data from another application's API and using it in the context of their own. Your challenge is to build a weather dashboard that will run in the browser and feature dynamically updated HTML and CSS.
+This challenge involved the use of the OpenWeather API. It was the first project I've done that involved getting data from a server and then manipulating that data to add function and usability to my applications. This was very rewarding to me. I enjoyed using console.log to see the data before and after I "captured" my required content from the data object.
 
-Use the [OpenWeather One Call API](https://openweathermap.org/api/one-call-api) to retrieve weather data for cities. Read through the documentation for setup and usage instructions. You will use `localStorage` to store any persistent data. For more information on how to work with the OpenWeather API, refer to the [Full-Stack Blog on how to use API keys](https://coding-boot-camp.github.io/full-stack/apis/how-to-use-api-keys).
-
-## User Story
-
-```
-AS A traveler
-I WANT to see the weather outlook for multiple cities
-SO THAT I can plan a trip accordingly
-```
-
-## Acceptance Criteria
+The Acceptance Criteria for this challenge was as follows:
 
 ```
 GIVEN a weather dashboard with form inputs
@@ -30,71 +20,32 @@ WHEN I click on a city in the search history
 THEN I am again presented with current and future conditions for that city
 ```
 
-## Mock-Up
+## Github Links
 
-The following image shows the web application's appearance and functionality:
+Github Repo: https://github.com/hackpres/HackTheWeather
+Github Pages: https://hackpres.github.io/HackTheWeather/
 
-![The weather app includes a search option, a list of cities, and a five-day forecast and current weather conditions for Atlanta.](./Assets/06-server-side-apis-homework-demo.png)
 
-## Grading Requirements
+## Screenshots of Deployed App
 
-> **Note**: If a Challenge assignment submission is marked as “0”, it is considered incomplete and will not count towards your graduation requirements. Examples of incomplete submissions include the following:
->
-> * A repository that has no code
->
-> * A repository that includes a unique name but nothing else
->
-> * A repository that includes only a README file but nothing else
->
-> * A repository that only includes starter code
+The following images show the web application's appearance and functionality:
+![mobile view](./assets/images/mobileTop.png?raw=true "Mobile view of header, citySearch, and Current conditions.")
+![mobile Forecast](./assets/images/mobileForecast.png?raw=true "Mobile view of the first 3 days in the 5 Day Forecast.")
+![Medium to Large screen sizes](./assets/images/mdAndLgTop.png?raw=true "Application viewed from Medium to Large screens.")
+![Desktop Views](./assets/images/xlTop.png?raw=true "Desktop view of weather dashboard app.")
 
-This Challenge is graded based on the following criteria: 
 
-### Technical Acceptance Criteria: 40%
+## Usage and Features
 
-* Satisfies all of the above acceptance criteria plus the following:
+I designed my application to initiate with data for Atlanta. That way a user can see the entirety of the content fields even before searching for their desired cities weather conditions.
+![initialize Atlanta](./assets/images/codeInitialize.png?raw=true "API call to get weather info for Atlanta.")
 
-    * Uses the OpenWeather API to retrieve weather data.
+When a user inputs a city name and clicks the search button, the page gets updated with that cities current and forecasted weather data, then that city name and coordinates get saved to local storage. I chose to only save the coordinates as thats the only param I need in order to fetch a new API data object when the user selects a city they've previously searched. I used the UV Index chart from the EPA to decide the colors and values to change the background color of the UV index value. (https://www.epa.gov/sunsafety/uv-index-scale-0).
+![Current weather conditions](./assets/images/codeCurrentConditions.png?raw=true "Code to print current weather conditions from API data.")
+![Forecasted weather conditions](./assets/images/code5DayForecast.png?raw=true "Code to print forecasted data from API call.")
+![City save to storage](./assets/images/codeStorageSave.png?raw=true "Code to save city name and coordinates to local storage.")
+![local storage](./assets/images/localStorage.png?raw=true "Image of my local storage showing how I'm storing city name and coordinates.")
 
-    * Uses `localStorage` to store persistent data.
-
-### Deployment: 32%
-
-* Application deployed at live URL.
-
-* Application loads with no errors.
-
-* Application GitHub URL submitted.
-
-* GitHub repository that contains application code.
-
-### Application Quality: 15%
-
-* Application user experience is intuitive and easy to navigate.
-
-* Application user interface style is clean and polished.
-
-* Application resembles the mock-up functionality provided in the Challenge instructions.
-
-### Repository Quality: 13%
-
-* Repository has a unique name.
-
-* Repository follows best practices for file structure and naming conventions.
-
-* Repository follows best practices for class/id naming conventions, indentation, quality comments, etc.
-
-* Repository contains multiple descriptive commit messages.
-
-* Repository contains quality readme file with description, screenshot, and link to deployed application.
-
-## Review
-
-You are required to submit BOTH of the following for review:
-
-* The URL of the functional, deployed application.
-
-* The URL of the GitHub repository. Give the repository a unique name and include a readme describing the project.
-
-- - -
-© 2022 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
+I used a modal on mobile to display the history, that way the user experience isnt diminished by multiple "history buttons." However on larger screens I displayed the history buttons under the city search input.
+![mobile modal for history](./assets/images/mobileModal.png?raw=true "Modal activated by previous cities searched button.")
+![search history buttons](./assets/images/codeHistory.png?raw=true "Code to create and append history buttons.")

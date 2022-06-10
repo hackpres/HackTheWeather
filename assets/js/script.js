@@ -15,7 +15,9 @@ const forecast = document.getElementById("forecast");
 
 
 searchBtn.addEventListener('click', () => {
-    var userCity = citySearch.value
+    var userCitySplit = citySearch.value.split(" ")
+    var userCity = userCitySplit.map((word) => word.charAt(0).toUpperCase() + word.substring(1))
+    .join(" ");
     console.log(userCity);
     
     getCityCoordinates(userCity)
@@ -56,7 +58,8 @@ function getCityCoordinates(userCity) {
             console.log(cityLat, cityLon);
 
             clearInputContent();
-            cityName.innerText = citySearch.value.charAt(0).toUpperCase() + citySearch.value.slice(1);
+            cityName.innerText = citySearch.value.split(" ").map((word) => word.charAt(0).toUpperCase() + word.substring(1))
+            .join(" ");
             getWeather(`https://api.openweathermap.org/data/2.5/onecall?lat=${cityLat}&lon=${cityLon}&units=imperial&&appid=cccd45bf2b5eca98c58877bde4b85aed`);
         })
 }
@@ -160,7 +163,18 @@ function getWeather(apiURL) {
             let temp = document.createElement("p");
             let wind = document.createElement("p");
             let humidity = document.createElement("p");
-            container.classList.add("container", "d-md-flex", "d-xl-block", "justify-content-center", "mx-xl-2", "my-2", "pb-xl-3", "w-xs-75", "w-md-100", "custom-bg-info", "text-white", "custom-width-xl");
+            container.classList.add("container", 
+            "d-md-flex",
+             "d-xl-block", 
+             "justify-content-center", 
+             "mx-xl-2", 
+             "my-2", 
+             "pb-xl-3", 
+             "w-xs-75", 
+             "w-md-100", 
+             "custom-bg-info", 
+             "text-white", 
+             "custom-width-xl");
             date.innerText = `${dateTimestamp.getMonth() + 1}/${dateTimestamp.getDate()}/${dateTimestamp.getFullYear()}`;
             date.classList.add("mb-0", "mt-3", "fs-5")
             icon.setAttribute("src", `https://openweathermap.org/img/wn/${dayIcon}@2x.png`);
@@ -179,7 +193,11 @@ function getWeather(apiURL) {
 
             forecast.appendChild(container);
         });
-        let cityNameForStorage = citySearch.value.charAt(0).toUpperCase() + citySearch.value.slice(1);
+
+        let cityNameForStorageSplit = citySearch.value.split(" ");
+        let cityNameForStorage = cityNameForStorageSplit.map((word) => word.charAt(0).toUpperCase() + word.substring(1))
+        .join(" ");
+
         saveToLocalStorage(cityNameForStorage, `${data.lat},${data.lon}`)
     });
 }
