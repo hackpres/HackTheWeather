@@ -23,6 +23,7 @@ THEN I am again presented with current and future conditions for that city
 ## Github Links
 
 Github Repo: https://github.com/hackpres/HackTheWeather
+
 Github Pages: https://hackpres.github.io/HackTheWeather/
 
 
